@@ -2,3 +2,4 @@ configuration-as-code
 job-dsl
 script-security
 role-strategy
+parameterized-trigger
