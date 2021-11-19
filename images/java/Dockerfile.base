@@ -1,18 +1,7 @@
-FROM maven:3.8-jdk-17-alpine as builder
-
-COPY . /app
-
-WORKDIR /app
-
-RUN mvn dependency:resolve
-
-RUN mvn package
-
-FROM openjdk:17-alpine
-
+FROM maven:3.8-openjdk-17-slim
 # using bash shell
 SHELL ["/bin/bash", "-c"]
 # copying all worker files in the docker
-COPY --from=builder /app /app
+COPY . /app
 # going to /app
 WORKDIR /app

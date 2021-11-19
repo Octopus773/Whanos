@@ -1,3 +1,11 @@
 FROM whanos-java
 
+
+# get dependencies
+RUN mvn dependency:resolve -f app/pom.xml
+# create bin
+RUN mvn package -f app/pom.xml
+# copying the binary 
+RUN cp app/target/app.jar .
+# run the executable
 CMD java -jar app.jar
