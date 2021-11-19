@@ -1,0 +1,12 @@
+FROM gcc:11.2
+
+# copying all current directory files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
+# compiling the binary
+RUN make
+# remove the Makefile + the sources of the binary
+RUN rm -rf Makefile app
+# run the binary
+CMD ["./compiled-app"]
