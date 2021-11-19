@@ -1,9 +1,5 @@
 FROM whanos-c:latest
 
-# copying all current directory files in the docker
-COPY . /app
-# going to /app
-WORKDIR /app
 # compiling the binary
 RUN make
 # remove the Makefile + the sources of the binary
