@@ -1,0 +1,6 @@
+FROM whanos-python
+
+# isntall dependencies
+RUN pip install -r requirements.txt
+# run app
+CMD ["python", "-m", "app"]
