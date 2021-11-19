@@ -6,3 +6,5 @@ SHELL ["/bin/bash", "-c"]
 COPY . /app
 # going to /app
 WORKDIR /app
+# running the befunge file
+CMD befunge93 app/main.bf

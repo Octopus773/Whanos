@@ -6,3 +6,7 @@ SHELL ["/bin/bash", "-c"]
 COPY . /app
 # going to /app
 WORKDIR /app
+# isntall dependencies
+RUN pip install -r requirements.txt
+# run app
+CMD ["python", "-m", "app"]
