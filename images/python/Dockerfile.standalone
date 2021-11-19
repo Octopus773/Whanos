@@ -1,4 +1,4 @@
-FROM whanos-python
+FROM whanos-python:latest
 
 # isntall dependencies
 RUN pip install -r requirements.txt

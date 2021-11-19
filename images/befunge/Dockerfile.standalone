@@ -1,0 +1,4 @@
+FROM whanos-befunge:latest
+
+# running the befunge file
+CMD befunge93 app/main.bf

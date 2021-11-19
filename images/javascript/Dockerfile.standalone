@@ -1,4 +1,4 @@
-FROM whanos-javascript
+FROM whanos-javascript:latest
 
 # Install app dependencies
 RUN npm install

@@ -1,0 +1,8 @@
+FROM esolang/befunge93
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all current directory files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
