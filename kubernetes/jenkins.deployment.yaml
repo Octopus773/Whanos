@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins-image
+        image: eu.gcr.io/plucky-agency-332314/whanos_jenkins
+        ports:
+        - containerPort: 8080
+        env:
+          - name: ADMIN_PASSWORD
+            value: "password"
+          - name: DOCKER_HOST
+            value: "tcp://docker:2375"
+      restartPolicy: Always

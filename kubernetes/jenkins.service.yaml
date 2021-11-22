@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  jenkins
+spec:
+  selector:
+    app:  jenkins
+  type:  ClusterIP
+  ports:
+  - name:  http-web-page
+    port:  8080
+    targetPort:  8080
