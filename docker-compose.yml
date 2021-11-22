@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  jenkins:
+    build: .
+    restart: on-failure
+    environment:
+      - ADMIN_PASSWORD=password
+      - DOCKER_HOST=tcp://docker:2375
+    ports:
+      - 8080:8080
+    depends_on:
+      - docker
+  docker:
+    image: docker:1.12.6-dind
+    restart: on-failure
+    privileged: true
+    ports:
+      - 2375:2375
+    environment:
+     - DOCKER_TLS_CERTDIR=

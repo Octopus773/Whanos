@@ -3,3 +3,4 @@ job-dsl
 script-security
 role-strategy
 parameterized-trigger
+docker-build-publish
