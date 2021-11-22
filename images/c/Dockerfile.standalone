@@ -1,8 +1,26 @@
-FROM whanos-c:latest
+FROM gcc:11.2 as builder
 
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all current directory files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
 # compiling the binary
 RUN make
 # remove the Makefile + the sources of the binary
 RUN rm -rf Makefile app
+
+
+FROM frolvlad/alpine-glibc
+
+# install bash
+RUN apk add --no-cache bash
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# getting the binary
+COPY --from=builder /app /app
+# going to /app
+WORKDIR /app
 # run the binary
 CMD ["./compiled-app"]

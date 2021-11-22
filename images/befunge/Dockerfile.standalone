@@ -1,1 +1,10 @@
-FROM whanos-befunge:latest
+FROM esolang/befunge93
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all current directory files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
+# running the befunge file
+CMD befunge93 app/main.bf

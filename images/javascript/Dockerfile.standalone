@@ -1,1 +1,14 @@
-FROM whanos-javascript:latest
+FROM node:14.17.5
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all worker files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
+# Install app dependencies
+RUN npm install
+# If you are building your code for production
+RUN npm ci --only=production
+# run the application
+CMD [ "node", "." ]

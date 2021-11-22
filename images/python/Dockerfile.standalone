@@ -1,1 +1,12 @@
-FROM whanos-python:latest
+FROM python:3.10-slim-buster
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all worker files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
+# isntall dependencies
+RUN pip install -r requirements.txt
+# run app
+CMD ["python", "-m", "app"]

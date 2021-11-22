@@ -1,4 +1,4 @@
-FROM gcc:11.2
+FROM gcc:11.2 as builder
 
 # using bash shell
 SHELL ["/bin/bash", "-c"]
@@ -6,3 +6,21 @@ SHELL ["/bin/bash", "-c"]
 COPY . /app
 # going to /app
 WORKDIR /app
+# compiling the binary
+RUN make
+# remove the Makefile + the sources of the binary
+RUN rm -rf Makefile app
+
+
+FROM frolvlad/alpine-glibc
+
+# install bash
+RUN apk add --no-cache bash
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# getting the binary
+COPY --from=builder /app /app
+# going to /app
+WORKDIR /app
+# run the binary
+CMD ["./compiled-app"]
