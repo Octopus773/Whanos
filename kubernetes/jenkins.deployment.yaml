@@ -16,7 +16,8 @@ spec:
       - name: jenkins-image
         image: eu.gcr.io/plucky-agency-332314/whanos_jenkins
         ports:
-        - containerPort: 8080
+        - name: web-page
+          containerPort: 8080
         env:
           - name: ADMIN_PASSWORD
             value: "password"
