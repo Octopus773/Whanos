@@ -6,13 +6,13 @@ COPY . /app
 # going to /app
 WORKDIR /app
 # get dependencies
-RUN mvn dependency:resolve -f app/pom.xml
 # create bin
-RUN mvn package -f app/pom.xml
-# copying the binary 
-RUN cp app/target/app.jar .
+# copying the binary
 # removing sources
-RUN rm -rf app/
+RUN mvn dependency:resolve -f app/pom.xml \
+    && mvn package -f app/pom.xml \
+    && cp app/target/app.jar . \
+    && rm -rf app/
 
 
 FROM openjdk:17

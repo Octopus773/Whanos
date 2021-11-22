@@ -3,10 +3,10 @@ FROM python:3.10-slim-buster
 # using bash shell
 SHELL ["/bin/bash", "-c"]
 # copying all worker files in the docker
-COPY . /app
+ONBUILD COPY . /app
 # going to /app
-WORKDIR /app
+ONBUILD WORKDIR /app
 # isntall dependencies
-RUN pip install -r requirements.txt
+ONBUILD RUN pip install -r requirements.txt
 # run app
-CMD ["python", "-m", "app"]
+ONBUILD CMD ["python", "-m", "app"]
