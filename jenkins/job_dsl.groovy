@@ -46,7 +46,7 @@ freeStyleJob("link-project") {
 					}
 					wrappers {
 						steps {
-							shell("./deploy.sh")
+							shell("/jenkins/deploy.sh")
 						}
 					}
 				}
