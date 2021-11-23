@@ -12,12 +12,14 @@ RUN make
 RUN rm -rf Makefile app
 
 
-FROM frolvlad/alpine-glibc
+FROM alpine:3.15
 
 # install bash
 RUN apk add --no-cache bash
 # using bash shell
 SHELL ["/bin/bash", "-c"]
+# installing the glibc
+RUN apk add libc6-compat
 # getting the binary
 COPY --from=builder /app /app
 # going to /app

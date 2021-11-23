@@ -1,4 +1,4 @@
-FROM gcc:11.2 as builder
+FROM gcc:11.2
 
 # using bash shell
 SHELL ["/bin/bash", "-c"]
@@ -9,17 +9,5 @@ ONBUILD WORKDIR /app
 # compiling the binary
 # remove the Makefile + the sources of the binary
 ONBUILD RUN make && rm -rf Makefile app
-
-
-#FROM frolvlad/alpine-glibc
-
-# install bash
-#RUN apk add --no-cache bash
-# using bash shell
-SHELL ["/bin/bash", "-c"]
-# getting the binary
-#ONBUILD COPY --from=builder /app /app
-# going to /app
-ONBUILD WORKDIR /app
 # run the binary
 ONBUILD CMD ["./compiled-app"]
