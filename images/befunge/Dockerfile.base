@@ -1,10 +1,16 @@
-FROM esolang/befunge93
+FROM node:14.17.5-alpine
 
+# install bash & curl
+RUN apk add --no-cache bash curl
 # using bash shell
 SHELL ["/bin/bash", "-c"]
+# install custom "bin" to interpret befunge93
+RUN npm i befunge93 \
+    && curl -L https://gist.githubusercontent.com/Octopus773/af90e3164cbb5a2cfeb786f0590a89a6/raw/e0ae92fd1ea8fa8e5030605f3797f43837c3430f/befunge93-cli.js\
+    > /opt/befunge93-cli.js
 # copying all current directory files in the docker
 ONBUILD COPY . /app
 # going to /app
 ONBUILD WORKDIR /app
 # running the befunge file
-ONBUILD CMD befunge93 app/main.bf
+ONBUILD CMD node /opt/befunge93-cli.js -f app/main.bf
