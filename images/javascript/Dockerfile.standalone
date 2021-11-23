@@ -1,5 +1,7 @@
-FROM node:14.17.5
+FROM node:14.17.5-alpine
 
+# install bash
+RUN apk add --no-cache bash
 # using bash shell
 SHELL ["/bin/bash", "-c"]
 # copying all worker files in the docker
