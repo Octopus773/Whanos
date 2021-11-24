@@ -9,8 +9,6 @@ COPY . /app
 # going to /app
 WORKDIR /app
 # Install app dependencies
-# If you are building your code for production
-RUN npm install \
-    && npm ci --only=production
+RUN npm install --production=false
 # run the application
 CMD [ "node", "." ]
