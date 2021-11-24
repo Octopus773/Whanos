@@ -1,0 +1,16 @@
+FROM node:14.17.5-alpine
+
+# install bash
+RUN apk add --no-cache bash
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all worker files in the docker
+COPY . /app
+# going to /app
+WORKDIR /app
+# Install app dependencies
+# If you are building your code for production
+RUN npm install \
+    && npm ci --only=production
+# run the application
+CMD [ "node", "." ]
