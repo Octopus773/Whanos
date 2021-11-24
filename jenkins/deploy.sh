@@ -31,7 +31,7 @@ echo ${LANGUAGE[@]} matched
 if [[ -f Dockerfile ]]; then
 	docker build . -t whanos-${LANGUAGE[0]}-standalone
 else
-	docker build /images/${LANGUAGE[0]} \
+	docker build . \
 		-f /images/${LANGUAGE[0]}/Dockerfile.standalone \
 		-t whanos-${LANGUAGE[0]}-standalone
 fi
