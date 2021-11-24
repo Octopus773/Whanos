@@ -1,0 +1,14 @@
+FROM python:3.10-alpine
+
+# install bash
+RUN apk add --no-cache bash
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all worker files in the docker
+ONBUILD COPY . /app
+# going to /app
+ONBUILD WORKDIR /app
+# isntall dependencies
+ONBUILD RUN pip install -r requirements.txt
+# run app
+ONBUILD CMD ["python", "-m", "app"]

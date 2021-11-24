@@ -1,0 +1,18 @@
+FROM maven:3.8-openjdk-17-slim
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all files in the docker
+ONBUILD COPY . /app
+# going to /app
+ONBUILD WORKDIR /app
+# get dependencies
+# create bin
+# copying the binary
+# removing sources
+ONBUILD RUN mvn dependency:resolve -f app/pom.xml \
+            && mvn package -f app/pom.xml \
+            && cp app/target/app.jar . \
+            && rm -rf app/
+# run the executable
+ONBUILD CMD java -jar app.jar

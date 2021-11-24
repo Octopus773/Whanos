@@ -12,7 +12,7 @@ services:
     depends_on:
       - docker
   docker:
-    image: docker:1.12.6-dind
+    image: docker:dind
     restart: on-failure
     privileged: true
     ports:
