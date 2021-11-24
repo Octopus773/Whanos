@@ -9,8 +9,6 @@ ONBUILD COPY . /app
 # going to /app
 ONBUILD WORKDIR /app
 # Install app dependencies
-# If you are building your code for production
-ONBUILD RUN npm install \
-            && npm ci --only=production
+ONBUILD RUN npm install --production=false
 # run the application
 ONBUILD CMD [ "node", "." ]
