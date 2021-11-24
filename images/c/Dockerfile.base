@@ -1,1 +1,13 @@
 FROM gcc:11.2
+
+# using bash shell
+SHELL ["/bin/bash", "-c"]
+# copying all current directory files in the docker
+ONBUILD COPY . /app
+# going to /app
+ONBUILD WORKDIR /app
+# compiling the binary
+# remove the Makefile + the sources of the binary
+ONBUILD RUN make && rm -rf Makefile app
+# run the binary
+ONBUILD CMD ["./compiled-app"]
