@@ -26,23 +26,23 @@ freeStyleJob("Whanos base images/Build all base images") {
 
 freeStyleJob("link-project") {
 	parameters {
-		stringParam("GITHUB_NAME", null, 'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")')
+		stringParam("GIT_URL", null, 'Git repository url (e.g.: "git@github.com:EpitechIT31000/chocolatine")')
 		stringParam("DISPLAY_NAME", null, "Display name for the job")
 	}
 	steps {
 		dsl {
 			text('''
 				freeStyleJob("Projects/$DISPLAY_NAME") {
-					triggers {
-						scm("M/1")
-					}
 					scm {
 						git {
 							remote {
 								name("origin")
-								github("$GITHUB_NAME")
+								url("$GIT_URL")
 							}
 						}
+					}
+					triggers {
+						scm("* * * * *")
 					}
 					wrappers {
 						steps {

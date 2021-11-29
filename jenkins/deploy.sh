@@ -38,4 +38,5 @@ fi
 
 if [[ -f whanos.yml ]]; then
 	# TODO deploy to kubernetes (img is tagged as whanos-${LANGUAGE[0]}-standalone)
+	true
 fi
