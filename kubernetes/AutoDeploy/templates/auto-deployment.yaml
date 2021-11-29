@@ -24,3 +24,20 @@ spec:
           - containerPort: {{ . }}
           {{- end }}
         {{- end }}
+{{- if .Values.deployment.ports }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-lb
+spec:
+  type: LoadBalancer
+  ports:
+    {{- range .Values.deployment.ports }}
+    - targetPort: {{ . }}
+      protocol: TCP
+      port: {{ . }}
+    {{- end }}
+  selector:
+    app: {{ .Release.Name }}
+{{- end }}
