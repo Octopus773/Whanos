@@ -13,14 +13,14 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-      - name: {{ .Values.image.name }}
-        image: {{ .Values.image.image }}
-        {{- if .Values.resources -}}
-        ressources: {{ .Values.resources }}
-        {{- end -}}
-        ports: |-
-          {{- range .Values.deployment.ports -}}
-            - containerPort: {{ . }}
-          {{- end -}}
-        {{- end -}}
-      restartPolicy: Always
+      - name: {{- .Values.image.name }}
+        image: {{- .Values.image.image }}
+        {{- if .Values.deployment.resources }}
+        resources: {{ .Values.deployment.resources | toJson }}
+        {{- end }}
+        {{- if .Values.deployment.ports }}
+        ports:
+          {{- range .Values.deployment.ports }}
+          - containerPort: {{ . }}
+          {{- end }}
+        {{- end }}
