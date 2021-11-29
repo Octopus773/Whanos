@@ -28,7 +28,8 @@ if [[ ${#LANGUAGE[@]} != 1 ]]; then
 fi
 echo ${LANGUAGE[@]} matched
 
-image_name = eu.gcr.io/plucky-agency-332314/whanos-$1-${LANGUAGE[0]}
+#image_name=eu.gcr.io/plucky-agency-332314/whanos-$1-${LANGUAGE[0]}
+image_name=europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/whanos-$1-${LANGUAGE[0]}
 
 if [[ -f Dockerfile ]]; then
 	docker build . -t $image_name
@@ -38,16 +39,16 @@ else
 		-t $image_name
 fi
 
-docker push image_name
+docker push $image_name
 
 if [[ -f whanos.yml ]]; then
-	if [[ helm status $1 ]]; then
-		helm upgrade -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$image_name
+	if helm status $1 &> /dev/null; then
+		helm upgrade -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$1-name
 	else
-		helm install -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$image_name
+		helm install -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$1-name
 	fi
 else
-	if [[ helm status $1 ]]; then
+	if helm status $1 &> /dev/null; then
 		helm uninstall $1
 	fi
 fi

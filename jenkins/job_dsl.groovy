@@ -48,7 +48,7 @@ freeStyleJob("link-project") {
 						preBuildCleanup()
 					}
 					steps {
-						shell("/jenkins/deploy.sh \"$DISPLAY_NAME\"")
+						shell("/jenkins/deploy.sh \\"$DISPLAY_NAME\\"")
 					}
 				}
 			''')
