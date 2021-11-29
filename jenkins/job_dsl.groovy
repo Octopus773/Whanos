@@ -45,9 +45,10 @@ freeStyleJob("link-project") {
 						scm("* * * * *")
 					}
 					wrappers {
-						steps {
-							shell("/jenkins/deploy.sh")
-						}
+						preBuildCleanup()
+					}
+					steps {
+						shell("/jenkins/deploy.sh \"$DISPLAY_NAME\"")
 					}
 				}
 			''')

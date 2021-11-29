@@ -28,15 +28,26 @@ if [[ ${#LANGUAGE[@]} != 1 ]]; then
 fi
 echo ${LANGUAGE[@]} matched
 
+image_name = eu.gcr.io/plucky-agency-332314/whanos-$1-${LANGUAGE[0]}
+
 if [[ -f Dockerfile ]]; then
-	docker build . -t whanos-${LANGUAGE[0]}-standalone
+	docker build . -t $image_name
 else
 	docker build . \
 		-f /images/${LANGUAGE[0]}/Dockerfile.standalone \
-		-t whanos-${LANGUAGE[0]}-standalone
+		-t $image_name
 fi
 
+docker push image_name
+
 if [[ -f whanos.yml ]]; then
-	# TODO deploy to kubernetes (img is tagged as whanos-${LANGUAGE[0]}-standalone)
-	true
+	if [[ helm status $1 ]]; then
+		helm upgrade -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$image_name
+	else
+		helm install -f whanos.yml $1 /helm/AutoDeploy --set image.image=$image_name --set image.name=$image_name
+	fi
+else
+	if [[ helm status $1 ]]; then
+		helm uninstall $1
+	fi
 fi
