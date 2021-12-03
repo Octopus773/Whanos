@@ -20,16 +20,13 @@ RUN apt-get update \
     && usermod -aG docker jenkins \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-
 COPY kubernetes/AutoDeploy /helm/AutoDeploy
 
 COPY here.json /gcloud/
-RUN gcloud auth activate-service-account whanos-jenkins-860@plucky-agency-332314.iam.gserviceaccount.com --key-file=/gcloud/here.json  --project=plucky-agency-332314
-RUN gcloud auth configure-docker europe-west1-docker.pkg.dev
-RUN gcloud config set compute/zone europe-west1-b \
-    && gcloud container clusters get-credentials cluster-1
-#RUN cat /gcloud/here.json | docker login -u _json_key_base64 --password-stdin europe-west1-docker.pkg.dev
-
+#RUN gcloud auth activate-service-account whanos-jenkins-860@plucky-agency-332314.iam.gserviceaccount.com --key-file=/gcloud/here.json  --project=plucky-agency-332314
+#RUN gcloud auth configure-docker europe-west1-docker.pkg.dev
+#RUN gcloud config set compute/zone europe-west1-b \
+#    && gcloud container clusters get-credentials cluster-1
 #USER jenkins
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false

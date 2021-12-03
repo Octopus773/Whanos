@@ -3,7 +3,7 @@ version: "3.8"
 services:
   jenkins:
     image: whanos-jenkins
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - ADMIN_PASSWORD=password
       - DOCKER_HOST=tcp://docker:2375
@@ -13,7 +13,7 @@ services:
       - docker
   docker:
     image: docker:dind
-    restart: on-failure
+    restart: unless-stopped
     privileged: true
     ports:
       - 2375:2375
