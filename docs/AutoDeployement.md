@@ -27,7 +27,11 @@ Also, when one instance is down, another one can replace it during the restart t
 ### Resources
 Managing the resources you consume is really important, and the reasons are infinite:
 - A resource heavy application can choke other applications running on the same machine, hurting their performances.
-- If you're using a cloud provider, when you're paying what you consume you don't want to see your app running full crazy at 100% CPU usage or 10 GB of RAM.
+- If you're using a cloud provider, when you're paying what you consume, you don't want to see your app running full crazy at 100% CPU usage or 10 GB of RAM.
+
+We're supporting the same syntax as Kubernetes -> [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container)
 
 ### Ports
 This is the list of all used port by your application to communicate with the outside world. The automatic deployment will guarantee that the external requests are going to these specific ports.
+
+The IP address accessible from the outside world is printed at the end of the Jenkins deployment job.
