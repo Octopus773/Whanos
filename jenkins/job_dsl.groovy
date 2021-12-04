@@ -26,14 +26,14 @@ freeStyleJob("Whanos base images/Build all base images") {
 
 freeStyleJob("GCloud and GKE Login") {
 	parameters {
-		stringParam("GCLOUD_GKE_CLUSTER_LOCATION", null, 'GCLOUD_GKE_CLUSTER_LOCATION')
-		stringParam("GCLOUD_PROJECT_ID", null, "GCLOUD_PROJECT_ID")
-		stringParam("GCLOUD_SERVICE_ACCOUNT_MAIL", null, "GCLOUD_SERVICE_ACCOUNT_MAIL")
-		stringParam("GCLOUD_SERVICE_ACCOUNT_KEY_FILE", null, "GCLOUD_SERVICE_ACCOUNT_KEY_FILE")
-		stringParam("GCLOUD_GKE_CLUSTER_NAME", null, "GCLOUD_GKE_CLUSTER_NAME")
+		stringParam("GCLOUD_PROJECT_ID", null, "Gcloud Project id (ex: plucky-agency-332291)")
+		stringParam("GCLOUD_SERVICE_ACCOUNT_MAIL", null, "format: service-account-name@project-id.iam.gserviceaccount.com")
+		fileParam("gcloud-service-account-key.json", "The account service key file: https://cloud.google.com/iam/docs/creating-managing-service-account-keys")
+		stringParam("GCLOUD_GKE_CLUSTER_NAME", null, "The name of your GKE cluster")
+		stringParam("GCLOUD_GKE_CLUSTER_LOCATION", null, 'The correct location of your GKE clust: ex: europe-west1-b')
 	}
 	steps {
-		shell("gcloud auth activate-service-account \$GCLOUD_SERVICE_ACCOUNT_MAIL --key-file=/gcloud/here.json  --project=\$GCLOUD_PROJECT_ID")
+		shell("gcloud auth activate-service-account \$GCLOUD_SERVICE_ACCOUNT_MAIL --key-file=gcloud-service-account-key.json  --project=\$GCLOUD_PROJECT_ID")
 		shell("gcloud auth configure-docker europe-west1-docker.pkg.dev")
 		shell("gcloud config set compute/zone \$GCLOUD_GKE_CLUSTER_LOCATION")
 		shell("gcloud container clusters get-credentials \$GCLOUD_GKE_CLUSTER_NAME")

@@ -22,13 +22,6 @@ RUN apt-get update \
 
 COPY kubernetes/AutoDeploy /helm/AutoDeploy
 
-COPY here.json /gcloud/
-#RUN gcloud auth activate-service-account whanos-jenkins-860@plucky-agency-332314.iam.gserviceaccount.com --key-file=/gcloud/here.json  --project=plucky-agency-332314
-#RUN gcloud auth configure-docker europe-west1-docker.pkg.dev
-#RUN gcloud config set compute/zone europe-west1-b \
-#    && gcloud container clusters get-credentials cluster-1
-#USER jenkins
-
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 COPY jenkins/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
