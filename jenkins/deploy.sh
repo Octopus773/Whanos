@@ -38,25 +38,30 @@ else
 		-t $image_name
 fi
 
-docker push $image_name
+
+
+if ! docker push $image_name; then
+	exit 1
+fi
 
 if [[ -f whanos.yml ]]; then
 	helm upgrade -if whanos.yml "$1" /helm/AutoDeploy --set image.image=$image_name --set image.name="$1-name"
 
 	external_ip=""
-	ip_timeout=10
+	ip_timeout=20
 	echo "Trying to get the external IP:"
 	while [ -z $external_ip ]; do
+		if [[ "$ip_timeout" -eq "0" ]]; then
+			ip_timeout="Couldn't get the IP: Timeout"
+			break
+		fi
 		sleep 5
-		echo "."
+		echo -n "."
 		external_ip=$(kubectl get svc $1-lb --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
 		ip_timeout=$(($ip_timeout - 1))
-
-		if [[ "$ip_timeout" -eq "0" ]]
-			$ip_timeout="Couldn't get the IP: Timeout"
-		fi
 	done
 
+	echo "."
 	echo "$external_ip"
 else
 	if helm status "$1" &> /dev/null; then
