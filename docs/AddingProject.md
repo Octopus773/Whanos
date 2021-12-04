@@ -4,11 +4,11 @@ Using the Whanos to build, dockerize and deploy your application automatically i
 
 ## 1 — Access the Jenkins interface
 
-image
+![](assets/jenkins_home.png)
 
 Go to link-project and then go to the right the "Build with Parameters"
 
-image 2
+![](assets/project_arguments.png)
 
 You have to provide to elements
  - `GIT_URL` this is the HTTP URL used to clone your repository (ex: https://github.com/Octopus773/ts-hello-world.git)
