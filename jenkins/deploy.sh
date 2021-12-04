@@ -42,6 +42,22 @@ docker push $image_name
 
 if [[ -f whanos.yml ]]; then
 	helm upgrade -if whanos.yml "$1" /helm/AutoDeploy --set image.image=$image_name --set image.name="$1-name"
+
+	external_ip=""
+	ip_timeout=10
+	echo "Trying to get the external IP:"
+	while [ -z $external_ip ]; do
+		sleep 5
+		echo "."
+		external_ip=$(kubectl get svc $1-lb --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}")
+		ip_timeout=$(($ip_timeout - 1))
+
+		if [[ "$ip_timeout" -eq "0" ]]
+			$ip_timeout="Couldn't get the IP: Timeout"
+		fi
+	done
+
+	echo "$external_ip"
 else
 	if helm status "$1" &> /dev/null; then
 		helm uninstall "$1"

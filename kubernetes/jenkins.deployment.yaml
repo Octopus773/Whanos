@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: jenkins-image
-        image: eu.gcr.io/plucky-agency-332314/whanos_jenkins
+        image: europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/jenkins
         ports:
         - name: web-page
           containerPort: 8080
@@ -22,5 +22,5 @@ spec:
           - name: ADMIN_PASSWORD
             value: "password"
           - name: DOCKER_HOST
-            value: "tcp://docker:2375"
+            value: "tcp://10.0.6.237:2375"
       restartPolicy: Always

@@ -19,6 +19,9 @@ jenkins:
               - "Overall/Administer"
             assignments:
               - "admin"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
 
 jobs:
   - file: /jenkins/job_dsl.groovy

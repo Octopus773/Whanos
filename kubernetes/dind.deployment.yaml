@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dind-image
-        image: docker:1.12.6-dind
+        image: docker:dind
         ports:
         - containerPort: 2375
         env:
