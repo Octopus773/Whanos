@@ -16,8 +16,8 @@ You have to provide to elements
  
  - `DISPLAY_NAME` this is the label to represent your project on the Whanos instance
 	**Note:** The DISPLAY_NAME is unique in the Whanos instance
-	The DISPLAY_NAME **only** supports lowercase ascii chars, numerics (0 to 9) and `-`
-	The text `must` be validated by the following regex `[a-z\d\-]{0,20}` in order to successfully setup the pipeline.
+	The DISPLAY_NAME **only** supports lowercase ascii chars, numerics (0 to 9) and `-`n with a total length between 1 and 20 (bounds included)
+	The text `must` be validated by the following regex `[a-z\d\-]{1,20}` in order to successfully setup the pipeline.
 
 Once the project created you will find it under `Generated Items` in the project `link-project`
 
