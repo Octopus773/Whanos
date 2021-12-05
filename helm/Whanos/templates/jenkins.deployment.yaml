@@ -24,10 +24,10 @@ spec:
           containerPort: 8080
         envFrom:
           - secretRef:
-              name: postgres-secret
+              name: jenkins-secret
         env:
           - name: DOCKER_REGISTRY
-            value: {{ .Values.whanos.docker-registry }}
+            value: {{ .Values.whanos.docker.registry }}
           - name: DOCKER_HOST
-            value: {{ .Values.whanos.docker-host }}
+            value: {{ .Values.whanos.docker.host }}
       restartPolicy: Always
