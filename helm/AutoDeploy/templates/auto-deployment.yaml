@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  annotations:
+    rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+    spec:
+      containers:
+      - name: {{ .Values.image.name }}
+        image: {{ .Values.image.image }}
+        {{- if .Values.deployment.resources }}
+        resources: {{ .Values.deployment.resources | toJson }}
+        {{- end }}
+        {{- if .Values.deployment.ports }}
+        ports:
+          {{- range .Values.deployment.ports }}
+          - containerPort: {{ . }}
+          {{- end }}
+        {{- end }}
+{{- if .Values.deployment.ports }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-lb
+spec:
+  type: LoadBalancer
+  ports:
+    {{- range .Values.deployment.ports }}
+    - targetPort: {{ . }}
+      protocol: TCP
+      port: {{ . }}
+      name: {{ . }}-port
+    {{- end }}
+  selector:
+    app: {{ .Release.Name }}
+{{- end }}

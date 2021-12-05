@@ -1,0 +1,15 @@
+# Default values for AutoDeploy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+whanos:
+  jenkins:
+    # the repository to pull the jenkins image created by docker build . (at the root of the repo)
+    image: 
+    # the password has to be encoded in base64
+    adminpassword: 
+  docker:
+    # this is the docker registry base url
+    registry:
+    # by default another pod is running using dind
+    host: tcp://dind-service:2375

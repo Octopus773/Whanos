@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  jenkins:
+    build: .
+    image: whanos-jenkins
+    restart: unless-stopped
+    environment:
+      - ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
+      - DOCKER_HOST=tcp://docker:2375
+      - DOCKER_REGISTRY=${JENKINS_DOCKER_REGISTRY}
+    ports:
+      - 8080:8080
+    depends_on:
+      - docker
+  docker:
+    image: docker:dind
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 2375:2375
+    environment:
+     - DOCKER_TLS_CERTDIR=

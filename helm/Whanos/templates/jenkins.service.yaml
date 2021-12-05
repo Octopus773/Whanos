@@ -1,0 +1,27 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  jenkins-service
+spec:
+  selector:
+    app:  jenkins
+  type:  ClusterIP
+  ports:
+  - name:  http-web-page
+    port:  8080
+    protocol: TCP
+    targetPort:  web-page
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - targetPort: 8080
+      protocol: TCP
+      port: 80
+      name: external-access
+  selector:
+    app: jenkins
