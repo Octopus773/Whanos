@@ -15,9 +15,11 @@ You have to provide to elements
 	**Note:** The `GIT_URL` has to publicly available 
  
  - `DISPLAY_NAME` this is the label to represent your project on the Whanos instance
-	**Note:** The `DISPLAY_NAME` is unique in the Whanos instance
-	The `DISPLAY_NAME` **only** supports lowercase ascii chars, numerics (0 to 9) and `-`n with a total length between 1 and 20 (bounds included) and have at leaste one char in it.
-	The text `must` be validated by the following regex `[a-z\d\-]{1,20}` in order to successfully setup the pipeline.
+	
+    **Note:** The `DISPLAY_NAME` is unique in the Whanos instance
+	The `DISPLAY_NAME` **only** supports lowercase ascii chars, numerics (0 to 9) and `-` n with a total length between 1 and 20 (bounds included) and have at leaste one char in it.
+	
+    The text `must` be validated by the following regex `[a-z\d\-]{1,20}` in order to successfully setup the pipeline.
 
 **Important Note:** 
 On the first time you have to approve the script in order to run it with Jenkins
