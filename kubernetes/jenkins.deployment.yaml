@@ -22,5 +22,5 @@ spec:
           - name: ADMIN_PASSWORD
             value: "password"
           - name: DOCKER_HOST
-            value: "tcp://10.0.6.237:2375"
+            value: "tcp://dind-service:2375"
       restartPolicy: Always
