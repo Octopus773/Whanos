@@ -4,8 +4,12 @@
 
 whanos:
   jenkins:
-    image:  europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/jenkins
-    adminpassword: aHVnZQ==
+    # the repository to pull the jenkins image created by docker build . (at the root of the repo)
+    image: 
+    # the password has to be encoded in base64
+    adminpassword: 
   docker:
-    registry: europe-west1-docker.pkg.dev/plucky-agency-332314
+    # this is the docker registry base url
+    registry:
+    # by default another pod is running using dind
     host: tcp://dind-service:2375
