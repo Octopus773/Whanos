@@ -41,6 +41,7 @@ spec:
     - targetPort: {{ . }}
       protocol: TCP
       port: {{ . }}
+      name: {{ . }}-port
     {{- end }}
   selector:
     app: {{ .Release.Name }}

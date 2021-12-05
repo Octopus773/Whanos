@@ -28,7 +28,7 @@ if [[ ${#LANGUAGE[@]} != 1 ]]; then
 fi
 echo ${LANGUAGE[@]} matched
 
-image_name=europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/whanos-$1-${LANGUAGE[0]}
+image_name=$DOCKER_REGISTRY/whanos/whanos-$1-${LANGUAGE[0]}
 
 if [[ -f Dockerfile ]]; then
 	docker build . -t $image_name

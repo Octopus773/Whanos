@@ -1,0 +1,10 @@
+# Default values for AutoDeploy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+whanos:
+  jenkins:
+    image:  europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/jenkins
+    admin-password: aHVnZQ==
+  docker-registry: europe-west1-docker.pkg.dev/plucky-agency-332314
+  docker-host: tcp://dind-service:2375

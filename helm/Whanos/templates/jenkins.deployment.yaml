@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins-deployment
+  annotations:
+    rollme: {{ randAlphaNum 5 | quote }}
 spec:
   replicas: 1
   selector:
@@ -11,10 +13,12 @@ spec:
     metadata:
       labels:
         app: jenkins
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
       - name: jenkins-image
-        image: europe-west1-docker.pkg.dev/plucky-agency-332314/whanos/jenkins
+        image: {{ .Values.whanos.jenkins.image }}
         ports:
         - name: web-page
           containerPort: 8080
@@ -23,7 +27,7 @@ spec:
               name: postgres-secret
         env:
           - name: DOCKER_REGISTRY
-            value: "europe-west1-docker.pkg.dev/plucky-agency-332314"
+            value: {{ .Values.whanos.docker-registry }}
           - name: DOCKER_HOST
-            value: "tcp://dind-service:2375"
+            value: {{ .Values.whanos.docker-host }}
       restartPolicy: Always

@@ -20,7 +20,7 @@ RUN apt-get update \
     && usermod -aG docker jenkins \
     && curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-COPY kubernetes/AutoDeploy /helm/AutoDeploy
+COPY helm/AutoDeploy /helm/AutoDeploy
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 COPY jenkins/plugins.txt /usr/share/jenkins/ref/plugins.txt

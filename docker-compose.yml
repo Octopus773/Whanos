@@ -6,8 +6,9 @@ services:
     image: whanos-jenkins
     restart: unless-stopped
     environment:
-      - ADMIN_PASSWORD=password
+      - ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
       - DOCKER_HOST=tcp://docker:2375
+      - DOCKER_REGISTRY=${JENKINS_DOCKER_REGISTRY}
     ports:
       - 8080:8080
     depends_on:
