@@ -2,7 +2,7 @@
 
 Our Whanos offer a pre config GCloud connection job.
 
-You must connect to a cluster and setup docker before trying to create any `link-project` otherwise the build will fail at the docker push step.
+At the Whanos start you must connect to a cluster and setup docker before trying to create any `link-project` otherwise the build will fail at the docker push step.
 
 ### Prerequisites
  - Gcloud kubernetes engine activated (GKE)
