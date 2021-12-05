@@ -30,7 +30,7 @@ freeStyleJob("GCloud and GKE Login") {
 		stringParam("GCLOUD_SERVICE_ACCOUNT_MAIL", null, "format: service-account-name@project-id.iam.gserviceaccount.com")
 		fileParam("gcloud-service-account-key.json", "The account service key file: https://cloud.google.com/iam/docs/creating-managing-service-account-keys")
 		stringParam("GCLOUD_GKE_CLUSTER_NAME", null, "The name of your GKE cluster")
-		stringParam("GCLOUD_GKE_CLUSTER_LOCATION", null, 'The correct location of your GKE clust: ex: europe-west1-b')
+		stringParam("GCLOUD_GKE_CLUSTER_LOCATION", null, 'The correct location of your GKE cluster: ex: europe-west1-b')
 	}
 	steps {
 		shell("gcloud auth activate-service-account \$GCLOUD_SERVICE_ACCOUNT_MAIL --key-file=gcloud-service-account-key.json  --project=\$GCLOUD_PROJECT_ID")
