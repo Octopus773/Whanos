@@ -1,6 +1,12 @@
 # Pipeline logging
 
-Each time the pipeline builds, it generates a log
+A build pipeline is triggered each time you click on `Build Now` or after you push to a Whanos managed repo under the minute
+
+Each time the pipeline runs, it generates a log
+
+A log contains valuable information like:
+ - The reason of your build error
+ - The external IP of your Deployment
 
 ## 1 — Introduction
 
@@ -46,21 +52,21 @@ Checking out Revision 64d6534e2cb20805bcb85a579125b94c356ee6c1 (origin/main)
  > git checkout -f 64d6534e2cb20805bcb85a579125b94c356ee6c1 # timeout=10
 Commit message: "2"
 First time build. Skipping changelog.
-[zoe-clement-27] $ /bin/sh -xe /tmp/jenkins15436770001186847745.sh
 ```
 ### Docker image build
 
 Even if you don't provide your own Dockerfile, the Whanos will handle Dockerization for you with a default Dockerfile.
+This is the main part of the log, this is where the compilation/build of the app takes place.
+Your build errors will be displayed here
 
 **Note:** 
 Languages with official automatic Dockerfiles (C, befunge93, Java, Python, JavaScript)
 
 You also have to follow Whanos automatic language detection rules to choose the correct Dockerfile.
 
-This is the main part of the log, this is where the compilation/build of the app takes place.
-Your build errors will be displayed here
 
 ```
+[zoe-clement-27] $ /bin/sh -xe /tmp/jenkins15436770001186847745.sh
 + /jenkins/deploy.sh zoe-clement-27
 javascript matched
 Sending build context to Docker daemon  162.3kB

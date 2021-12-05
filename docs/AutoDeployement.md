@@ -2,7 +2,7 @@
 
 Whanos offers you the possibility to automatically deploy your application, though the `whanos.yml` file located at the root of the repository.
 
-Once the image of the last commit of your git repository has been built successfully, we're looking at the presence of the `whanos.yml` file if found your application will be running in the cloud.
+Once the image of your git repository has been built successfully, we're looking at the presence of the `whanos.yml` file if found your application will be running in the cloud.
 
 Example of `whanos.yml`:
 ```yaml
@@ -17,7 +17,7 @@ deployment:
     - 3000
 ```
 
-The format of the whanos.yml is based on Kubernetes config files.
+The format of the `whanos.yml` is based on Kubernetes config files.
 
 ### Replicas
 Replicas is the number of simultaneous instances running your app.
