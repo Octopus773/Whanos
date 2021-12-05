@@ -36,9 +36,11 @@ You should see this
 You have to provide the following information:
  - `GCLOUD_PROJECT_ID`: This is your Gcloud Project Id
  - `GCLOUD_SERVICE_ACCOUNT_MAIL`: Your mail associated with your service account
-	 format: service-account-name@project-id.iam.gserviceaccount.com
+	 
+    Format: service-account-name@project-id.iam.gserviceaccount.com
  - `gcloud-service-account-key.json`: The account service key file: https://cloud.google.com/iam/docs/creating-managing-service-account-keys
-	Looks like this:
+	
+    Looks like this:
 	```json
 	{
         "type": "service_account",
